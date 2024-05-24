@@ -22,13 +22,18 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @GetMapping(value = "/test")
+    public String healthChech() {
+        return "Rest is working";
+    }
+
     @GetMapping(value = "/{id}")
     @Operation(summary = "List all categories")
     public ResponseEntity<Category> findCategory(@PathVariable Integer id) {
         try {
-            return new ResponseEntity<Category>(categoryService.getCategory(id), HttpStatus.OK);
+            return new ResponseEntity<>(categoryService.getCategory(id), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<Category>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
