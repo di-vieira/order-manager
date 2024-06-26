@@ -1,13 +1,8 @@
 package com.diego.study.ordermanager;
 
-import com.diego.study.ordermanager.model.Category;
-import com.diego.study.ordermanager.model.City;
-import com.diego.study.ordermanager.model.Product;
-import com.diego.study.ordermanager.model.State;
-import com.diego.study.ordermanager.repository.CategoryRepository;
-import com.diego.study.ordermanager.repository.CityRepository;
-import com.diego.study.ordermanager.repository.ProductRepository;
-import com.diego.study.ordermanager.repository.StateRepository;
+import com.diego.study.ordermanager.model.*;
+import com.diego.study.ordermanager.model.enums.ClientType;
+import com.diego.study.ordermanager.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,6 +26,12 @@ public class OrderManagerApplication implements CommandLineRunner {
 
 	@Autowired
 	private StateRepository stateRepository;
+
+	@Autowired
+	private ClientRepository clientRepository;
+
+	@Autowired
+	private AddressRepository addressRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(OrderManagerApplication.class, args);
@@ -64,9 +65,33 @@ public class OrderManagerApplication implements CommandLineRunner {
 		City city3 = new City(null, "Campinas", state1);
 		City city4 = new City(null, "Belo Horizonte", state2);
 		City city5 = new City(null, "Montes Claros", state2);
+		City city6 = new City(null, "Cotia", state1);
 
 		stateRepository.saveAll(List.of(state1, state2));
-		cityRepository.saveAll(List.of(city1, city2, city3, city4, city5));
+		cityRepository.saveAll(List.of(city1, city2, city3, city4, city5, city6));
 
+		Client client1 = new Client(null, "Diego Vieira", "diego.vieira@email.com", "12345678909", ClientType.B2C);
+		Client client2 = new Client(null, "Pedro Bó", "pedro.bo@email.com", "12345678909", ClientType.B2C);
+		Client client3 = new Client(null, "Misato Katsuragi", "misato.katsuragi@email.com", "12345678909", ClientType.B2C);
+		Client client4 = new Client(null, "Sócrates Brasileiro", "socrates@email.com", "12345678909", ClientType.B2C);
+		Client client5 = new Client(null, "Padaria Pão Gostoso", "pao.gostoso@email.com", "345678909/0001-54", ClientType.B2B);
+		Client client6 = new Client(null, "Mercados Chan", "mercados.chan@email.com", "111111111/0001-11", ClientType.B2B);
+
+		Address address1 = new Address(null, "Rua Kyalame", "16", null, "Jardim Claudio", "06715-835", client1, city6);
+		Address address2 = new Address(null, "Rua Augusta", "1450", "apto 44", "Centro", "01234-432", client2, city1);
+		Address address3 = new Address(null, "Rua dos Patos", "33", null, "Centro", "99999-999", client3, city2);
+		Address address4 = new Address(null, "Rua das Primas", "16", null, "Jardim Itatinga", "22222-222", client4, city3);
+		Address address5 = new Address(null, "Avenida Tiradentes", "10", null, "Pampulha", "33333-333", client5, city4);
+		Address address6 = new Address(null, "Rua do Trem", "912", null, "Centro", "44444-444", client6, city5);
+
+		client1.getPhones().addAll(List.of("999998888", "888889999"));
+		client2.getPhones().add("987654321");
+		client3.getPhones().add("896745231");
+		client4.getPhones().add("909090999");
+		client5.getPhones().addAll(List.of("987987987", "445673212"));
+		client6.getPhones().add("888888881");
+
+		clientRepository.saveAll(List.of(client1, client2, client3, client4, client5, client6));
+		addressRepository.saveAll(List.of(address1, address2, address3, address4, address5, address6));
 	}
 }
