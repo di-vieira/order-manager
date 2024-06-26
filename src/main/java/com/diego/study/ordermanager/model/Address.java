@@ -1,5 +1,6 @@
 package com.diego.study.ordermanager.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ public class Address implements Serializable {
     private String addressComplement;
     private String neighborhood;
     private String postalCode;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;

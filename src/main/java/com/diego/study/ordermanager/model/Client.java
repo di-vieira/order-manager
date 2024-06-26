@@ -1,6 +1,7 @@
 package com.diego.study.ordermanager.model;
 
 import com.diego.study.ordermanager.model.enums.ClientType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,6 +20,7 @@ public class Client implements Serializable {
     private String email;
     private String socialNumber;
     private Integer clientType;
+    @JsonManagedReference
     @OneToMany(mappedBy = "client")
     private List<Address> addresses = new ArrayList<>();
     @ElementCollection
