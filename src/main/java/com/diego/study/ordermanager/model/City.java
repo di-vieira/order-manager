@@ -9,6 +9,8 @@ import java.util.Objects;
 @Entity
 public class City implements Serializable {
 
+    private static final long serialVersionUUID = 1L;
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;

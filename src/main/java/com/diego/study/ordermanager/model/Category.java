@@ -10,6 +10,8 @@ import java.util.List;
 @Entity
 public class Category implements Serializable {
 
+    private static final long serialVersionUUID = 1L;
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;

@@ -2,7 +2,9 @@ package com.diego.study.ordermanager;
 
 import com.diego.study.ordermanager.model.*;
 import com.diego.study.ordermanager.model.enums.ClientType;
+import com.diego.study.ordermanager.model.enums.PaymentStatus;
 import com.diego.study.ordermanager.repository.*;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +12,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
@@ -32,6 +38,15 @@ public class OrderManagerApplication implements CommandLineRunner {
 
 	@Autowired
 	private AddressRepository addressRepository;
+
+	@Autowired
+	private OrderRepository orderRepository;
+
+	@Autowired
+	private PaymentRepository paymentRepository;
+
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(OrderManagerApplication.class, args);
@@ -83,6 +98,7 @@ public class OrderManagerApplication implements CommandLineRunner {
 		Address address4 = new Address(null, "Rua das Primas", "16", null, "Jardim Itatinga", "22222-222", client4, city3);
 		Address address5 = new Address(null, "Avenida Tiradentes", "10", null, "Pampulha", "33333-333", client5, city4);
 		Address address6 = new Address(null, "Rua do Trem", "912", null, "Centro", "44444-444", client6, city5);
+		Address address7 = new Address(null, "Rua da Independencia", "1412", null, "Centro", "55555-444", client6, city5);
 
 		client1.getPhones().addAll(List.of("999998888", "888889999"));
 		client2.getPhones().add("987654321");
@@ -93,5 +109,45 @@ public class OrderManagerApplication implements CommandLineRunner {
 
 		clientRepository.saveAll(List.of(client1, client2, client3, client4, client5, client6));
 		addressRepository.saveAll(List.of(address1, address2, address3, address4, address5, address6));
+
+		Order order1 = new Order(null, LocalDateTime.of(2024, 03, 01, 10, 45), client1, address1);
+		Order order2 = new Order(null, LocalDateTime.of(2024, 04, 04, 11, 44), client2, address2);
+		Order order3 = new Order(null, LocalDateTime.of(2024, 05, 05, 12, 43), client6, address6);
+		Order order4 = new Order(null, LocalDateTime.of(2024, 03, 01, 10, 45), client5, address5);
+
+		Payment payment1 = new PaymentBankSlip(null, PaymentStatus.OUTSTANDING, order1, LocalDate.of(2024, 03, 15), null);
+		Payment payment2 = new PaymentCreditCard(null, PaymentStatus.DONE, order2, 6);
+		Payment payment3 = new PaymentCreditCard(null, PaymentStatus.DONE, order3, 3);
+		Payment payment4 = new PaymentCreditCard(null, PaymentStatus.CANCELLED, order4, 1);
+
+		order1.setPayment(payment1);
+		order2.setPayment(payment2);
+		order3.setPayment(payment3);
+		order4.setPayment(payment4);
+
+		client1.getOrders().add(order1);
+		client2.getOrders().add(order2);
+		client6.getOrders().add(order3);
+		client5.getOrders().add(order4);
+
+		//orderRepository.saveAll(List.of(order1, order2, order3));
+		//paymentRepository.saveAll(List.of(payment1, payment2, payment3));
+		orderRepository.saveAll(List.of(order1, order2, order3, order4));
+		paymentRepository.saveAll(List.of(payment1, payment2, payment3, payment4));
+
+		OrderItem orderItem1 = new OrderItem(order1, product1, BigDecimal.ZERO, 5, BigDecimal.valueOf(35) );
+		OrderItem orderItem2 = new OrderItem(order1, product3, BigDecimal.ZERO, 15, BigDecimal.valueOf(2.5) );
+		OrderItem orderItem3 = new OrderItem(order2, product2, BigDecimal.TEN, 45, BigDecimal.valueOf(9.9) );
+		OrderItem orderItem4 = new OrderItem(order3, product3, BigDecimal.TEN, 100, BigDecimal.valueOf(2.5) );
+
+		order1.getOrderItems().addAll(Arrays.asList(orderItem1, orderItem2));
+		order2.getOrderItems().add(orderItem3);
+		order3.getOrderItems().add(orderItem4);
+
+		product1.getOrderItems().add(orderItem1);
+		product2.getOrderItems().add(orderItem3);
+		product3.getOrderItems().addAll(Arrays.asList(orderItem2, orderItem4));
+
+		orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3, orderItem4));
 	}
 }
