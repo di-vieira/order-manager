@@ -3,9 +3,6 @@ package com.diego.study.ordermanager.model;
 import com.diego.study.ordermanager.model.enums.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -1,7 +1,6 @@
 package com.diego.study.ordermanager.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -20,10 +19,8 @@ public class Order implements Serializable {
     private Integer id;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime createdDate;
-    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
     private Payment payment;
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;

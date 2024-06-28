@@ -1,6 +1,5 @@
 package com.diego.study.ordermanager.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,7 +16,6 @@ public class City implements Serializable {
 
     private String name;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "state_id")
     private State state;

@@ -3,8 +3,6 @@ package com.diego.study.ordermanager.model;
 import com.diego.study.ordermanager.model.enums.PaymentStatus;
 import jakarta.persistence.Entity;
 
-import java.util.Objects;
-
 @Entity
 public class PaymentCreditCard extends Payment {
 

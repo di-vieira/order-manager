@@ -1,6 +1,5 @@
 package com.diego.study.ordermanager.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -16,7 +15,7 @@ public class Product  implements Serializable {
     private Integer id;
     private String name;
     private BigDecimal price;
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "PRODUCT_CATEGORY",
             joinColumns = @JoinColumn(name = "product_id"),
