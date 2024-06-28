@@ -1,6 +1,7 @@
 package com.diego.study.ordermanager.model;
 
 import com.diego.study.ordermanager.model.enums.PaymentStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.aspectj.weaver.ast.Or;
@@ -16,6 +17,7 @@ public abstract class Payment implements Serializable {
     @Id
     private Integer id;
     private PaymentStatus paymentStatus;
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "order_id")
     @MapsId

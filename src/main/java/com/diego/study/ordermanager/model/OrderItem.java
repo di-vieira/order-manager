@@ -1,5 +1,6 @@
 package com.diego.study.ordermanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 public class OrderItem  implements Serializable {
     private static final long serialVersionUUID = 1L;
 
+    @JsonIgnore
     @EmbeddedId
     private OrderItemPK id = new OrderItemPK();
 
@@ -27,6 +29,7 @@ public class OrderItem  implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }

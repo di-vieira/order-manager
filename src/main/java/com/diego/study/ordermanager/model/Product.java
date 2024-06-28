@@ -1,6 +1,7 @@
 package com.diego.study.ordermanager.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -21,6 +22,7 @@ public class Product  implements Serializable {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "id.product")
     private Set<OrderItem> orderItems = new HashSet<>();
 
@@ -28,6 +30,7 @@ public class Product  implements Serializable {
 
     }
 
+    @JsonIgnore
     public List<Order> getOrders() {
         List<Order> orders = new ArrayList<>();
         for (OrderItem item : orderItems) {

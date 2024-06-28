@@ -1,6 +1,7 @@
 package com.diego.study.ordermanager.model;
 
 import com.diego.study.ordermanager.model.enums.PaymentStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +13,9 @@ import java.time.LocalDateTime;
 @Entity
 public class PaymentBankSlip extends Payment  {
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate expirationDate;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime paymentDate;
 
     public PaymentBankSlip(){
