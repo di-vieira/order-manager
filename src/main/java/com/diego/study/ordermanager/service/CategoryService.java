@@ -18,4 +18,8 @@ public class CategoryService {
     public Category getCategory(Integer id) {
         return categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Resource not found - Id: " + id + " - " + CategoryService.class.getName()));
     }
+
+    public Category createCategory (Category category) {
+        return categoryRepository.save(category);
+    }
 }
