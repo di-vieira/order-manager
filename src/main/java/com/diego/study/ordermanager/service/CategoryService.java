@@ -6,6 +6,9 @@ import com.diego.study.ordermanager.model.Category;
 import com.diego.study.ordermanager.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +25,11 @@ public class CategoryService {
 
     public List<Category> findAllCategories() {
         return categoryRepository.findAll();
+    }
+
+    public Page<Category> findCategoriesByPage(Integer pageNumber, Integer recordsPerPage, String direction, String orderBy) {
+        PageRequest pageRequest = PageRequest.of(pageNumber, recordsPerPage, Sort.Direction.valueOf(direction), orderBy);
+        return categoryRepository.findAll(pageRequest);
     }
     public Category createCategory (Category category) {
         return categoryRepository.save(category);

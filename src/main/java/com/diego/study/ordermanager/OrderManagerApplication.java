@@ -57,6 +57,16 @@ public class OrderManagerApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Category category1 = new Category(null, "IT");
 		Category category2 = new Category(null, "Sales");
+		Category category3 = new Category(null, "Electronics");
+		Category category4 = new Category(null, "Office");
+		Category category5 = new Category(null, "Home and Garden");
+		Category category6 = new Category(null, "Household Linen");
+		Category category7 = new Category(null, "Sports");
+		Category category8 = new Category(null, "Books");
+		Category category9 = new Category(null, "Games");
+		Category category10 = new Category(null, "Fashion");
+		Category category11 = new Category(null, "Beauty");
+		Category category12 = new Category(null, "Health");
 
 		Product product1 = new Product(null, "Laptop", BigDecimal.valueOf(3000.00));
 		Product product2 = new Product(null, "Chair", BigDecimal.valueOf(700.00));
@@ -69,7 +79,7 @@ public class OrderManagerApplication implements CommandLineRunner {
 		product2.getCategories().add(category2);
 		product3.getCategories().addAll(List.of(category1, category2));
 
-		categoryRepository.saveAll(List.of(category1, category2));
+		categoryRepository.saveAll(List.of(category1, category2, category3, category4, category5, category6, category7, category8, category9, category10, category11, category12));
 		productRepository.saveAll(List.of(product1, product2, product3));
 
 		State state1 = new State(null, "São Paulo");
