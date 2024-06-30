@@ -46,6 +46,12 @@ public class CategoryController {
         category.setId(id);
         categoryService.updateCategory(category);
         return ResponseEntity.noContent().build();
+    }
 
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete an existing category")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Integer id) {
+        categoryService.deleteCategory(id);
+        return ResponseEntity.noContent().build();
     }
 }

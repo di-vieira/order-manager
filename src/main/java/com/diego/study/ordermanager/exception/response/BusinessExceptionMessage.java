@@ -11,13 +11,23 @@ public class BusinessExceptionMessage implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private String errorMessage;
-    private Integer status;
     private LocalDateTime errorDateTime;
+    String errorMessage;
+    private Integer status;
+    private String path;
 
-    public BusinessExceptionMessage(String errorMessage, Integer status, LocalDateTime errorDateTime) {
+    public BusinessExceptionMessage(LocalDateTime errorDateTime, String errorMessage, Integer status, String path) {
+        this.errorDateTime = errorDateTime;
         this.errorMessage = errorMessage;
         this.status = status;
+        this.path = path;
+    }
+
+    public LocalDateTime getErrorDateTime() {
+        return errorDateTime;
+    }
+
+    public void setErrorDateTime(LocalDateTime errorDateTime) {
         this.errorDateTime = errorDateTime;
     }
 
@@ -37,11 +47,11 @@ public class BusinessExceptionMessage implements Serializable {
         this.status = status;
     }
 
-    public LocalDateTime getErrorDateTime() {
-        return errorDateTime;
+    public String getPath() {
+        return path;
     }
 
-    public void setErrorDateTime(LocalDateTime errorDateTime) {
-        this.errorDateTime = errorDateTime;
+    public void setPath(String path) {
+        this.path = path;
     }
 }

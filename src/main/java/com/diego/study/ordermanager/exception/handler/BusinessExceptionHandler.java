@@ -16,13 +16,13 @@ public class BusinessExceptionHandler {
 
     @ExceptionHandler(ResourceNotFound.class)
     public ResponseEntity<BusinessExceptionMessage> resourceNotFound(BusinessException exception, HttpServletRequest request){
-        BusinessExceptionMessage responseError = new BusinessExceptionMessage(exception.getMessage(), HttpStatus.NOT_FOUND.value(), LocalDateTime.now());
+        BusinessExceptionMessage responseError = new BusinessExceptionMessage(LocalDateTime.now(), exception.getMessage(), HttpStatus.NOT_FOUND.value(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseError);
     }
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<BusinessExceptionMessage> businessException(BusinessException exception, HttpServletRequest request){
-        BusinessExceptionMessage responseError = new BusinessExceptionMessage(exception.getMessage(), HttpStatus.BAD_REQUEST.value(), LocalDateTime.now());
+        BusinessExceptionMessage responseError = new BusinessExceptionMessage(LocalDateTime.now(), exception.getMessage(), HttpStatus.BAD_REQUEST.value(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseError);
     }
 }
