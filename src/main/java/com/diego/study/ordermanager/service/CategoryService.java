@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryService {
 
@@ -18,6 +20,9 @@ public class CategoryService {
         return categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Resource not found - Id: " + id + " - " + CategoryService.class.getName()));
     }
 
+    public List<Category> findAllCategories() {
+        return categoryRepository.findAll();
+    }
     public Category createCategory (Category category) {
         return categoryRepository.save(category);
     }
@@ -35,4 +40,5 @@ public class CategoryService {
             throw new BusinessException(String.format("Category ID %d cannot be deleted, because other entities still associated with it", id));
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package com.diego.study.ordermanager.controller;
 
+import com.diego.study.ordermanager.dto.CategoryDTO;
 import com.diego.study.ordermanager.model.Category;
 import com.diego.study.ordermanager.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/categories")
@@ -24,9 +26,19 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/{id}")
-    @Operation(summary = "List all categories")
+    @Operation(summary = "Find a specific category by its ID")
     public ResponseEntity<Category> findCategory(@PathVariable Integer id) {
         return ResponseEntity.ok().body(categoryService.findCategory(id));
+    }
+
+    @GetMapping()
+    @Operation(summary = "List all categories")
+    public ResponseEntity<List<CategoryDTO>> findAllCategories(){
+        List<CategoryDTO> categories = categoryService.findAllCategories()
+                .stream()
+                .map(category -> new CategoryDTO(category.getId(), category.getName()))
+                .toList();
+        return ResponseEntity.ok().body(categories);
     }
 
     @PostMapping()
