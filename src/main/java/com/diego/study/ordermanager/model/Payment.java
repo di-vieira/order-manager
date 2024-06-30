@@ -4,13 +4,15 @@ import com.diego.study.ordermanager.model.enums.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Payment implements Serializable {
 
-    private static final long serialVersionUUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     private Integer id;

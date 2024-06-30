@@ -3,6 +3,7 @@ package com.diego.study.ordermanager.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -12,7 +13,8 @@ import java.util.Set;
 @Table(name = "`ORDER`" )
 public class Order implements Serializable {
 
-    private static final long serialVersionUUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

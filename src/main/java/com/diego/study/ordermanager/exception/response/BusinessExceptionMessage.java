@@ -2,10 +2,15 @@ package com.diego.study.ordermanager.exception.response;
 
 import org.springframework.http.HttpStatus;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class BusinessExceptionMessage implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private String errorMessage;
     private Integer status;
     private LocalDateTime errorDateTime;

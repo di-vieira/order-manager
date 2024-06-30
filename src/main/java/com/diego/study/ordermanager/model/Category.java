@@ -2,6 +2,7 @@ package com.diego.study.ordermanager.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,8 @@ import java.util.List;
 @Entity
 public class Category implements Serializable {
 
-    private static final long serialVersionUUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

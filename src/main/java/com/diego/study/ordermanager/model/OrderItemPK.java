@@ -4,12 +4,14 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @Embeddable
 public class OrderItemPK implements Serializable {
 
-    private static final long serialVersionUUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @ManyToOne
     @JoinColumn(name = "order_id")

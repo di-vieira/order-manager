@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 @Entity
 public class OrderItem  implements Serializable {
-    private static final long serialVersionUUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @JsonIgnore
     @EmbeddedId

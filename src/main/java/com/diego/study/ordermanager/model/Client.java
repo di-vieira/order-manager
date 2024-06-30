@@ -4,6 +4,7 @@ import com.diego.study.ordermanager.model.enums.ClientType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -12,7 +13,8 @@ import java.util.Set;
 
 @Entity
 public class Client implements Serializable {
-    private static final long serialVersionUUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

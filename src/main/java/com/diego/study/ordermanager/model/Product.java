@@ -3,12 +3,17 @@ package com.diego.study.ordermanager.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
 @Entity
-public class Product  implements Serializable {
+public class Product implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     //TODO: Change to use LOMBOK
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
